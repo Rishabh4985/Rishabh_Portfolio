@@ -17,7 +17,7 @@ import {
   SiNextdotjs,
 } from "react-icons/si";
 
-const SkillsPage = () => {
+const Skills = () => {
   const skills = [
     {
       category: "Frontend Development",
@@ -54,9 +54,11 @@ const SkillsPage = () => {
 
   return (
     <div className="pt-24 px-6 pb-24 bg-gray-50">
-      <h2 className="text-4xl font-bold text-center text-blue-600 mb-10">
-        Skills & Expertise
-      </h2>
+      <section id="skills" className="pt-28 px-6 pb-24 bg-gray-50 scroll-mt-20">
+        <h2 className="text-4xl font-bold text-center text-blue-600 mb-10">
+          Skills & Expertise
+        </h2>
+      </section>
 
       {/* Skill Categories */}
       <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -85,4 +87,4 @@ const SkillsPage = () => {
   );
 };
 
-export default SkillsPage;
+export default Skills;

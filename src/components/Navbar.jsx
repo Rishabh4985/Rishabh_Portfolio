@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const location = useLocation();
+  const [activeSection, setActiveSection] = useState("#home");
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -14,22 +14,53 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
+  const handleScroll = (e, path) => {
+    e.preventDefault();
+    closeMenu();
+    setActiveSection(path);
+
+    const element = document.querySelector(path);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+  useEffect(() => {
+    const handleScrollSpy = () => {
+      const sections = ["#home", "#projects", "#skills", "#contact"];
+      const offset = 150;
+
+      sections.forEach((sec) => {
+        const element = document.querySelector(sec);
+        if (!element) return;
+
+        const top = element.offsetTop - offset;
+        const bottom = top + element.offsetHeight;
+
+        if (window.scrollY >= top && window.scrollY < bottom) {
+          setActiveSection(sec);
+        }
+      });
+    };
+    window.addEventListener("scroll", handleScrollSpy);
+    return () => window.removeEventListener("scroll", handleScrollSpy);
+  }, []);
+
+  const navLinks = [
+    { name: "Home", path: "#home" },
+    { name: "Projects", path: "#projects" },
+    { name: "Skills", path: "#skills" },
+    { name: "Contact", path: "#contact" },
+  ];
+
   const getLinkClass = (path) => {
     const baseClass = "px-3 py-1 rounded transition-colors duration-200";
     const activeClass = "bg-blue-600 text-white font-medium";
     const inactiveClass = "text-gray-600 hover:bg-blue-50 hover:text-blue-600";
 
-    return location.pathname === path
+    return activeSection === path
       ? `${baseClass} ${activeClass}`
       : `${baseClass} ${inactiveClass}`;
   };
-
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Skills", path: "/Skills" },
-    { name: "Contact", path: "/Contact" },
-    { name: "Projects", path: "/Projects" },
-  ];
 
   return (
     <nav className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
@@ -37,13 +68,13 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link
-              to="/"
+            <a
+              href="#home"
               className="text-2xl font-bold text-blue-600"
-              onClick={closeMenu}
+              onClick={(event) => handleScroll(event, "#home")}
             >
               MyPortfolio
-            </Link>
+            </a>
           </div>
 
           {/* Desktop Menu (Hidden on Mobile) */}
@@ -51,9 +82,13 @@ const Navbar = () => {
             <ul className="flex space-x-4">
               {navLinks.map((link) => (
                 <li key={link.name}>
-                  <Link to={link.path} className={getLinkClass(link.path)}>
+                  <a
+                    href={link.path}
+                    onClick={(e) => handleScroll(e, link.path)}
+                    className={getLinkClass(link.path)}
+                  >
                     {link.name}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -102,13 +137,13 @@ const Navbar = () => {
           <ul className="flex flex-col p-4 space-y-4">
             {navLinks.map((link) => (
               <li key={link.name}>
-                <Link
-                  to={link.path}
+                <a
+                  href={link.path}
                   className={`block text-lg ${getLinkClass(link.path)}`}
-                  onClick={closeMenu}
+                  onClick={(e) => handleScroll(e, link.path)}
                 >
                   {link.name}
-                </Link>
+                </a>
               </li>
             ))}
           </ul>

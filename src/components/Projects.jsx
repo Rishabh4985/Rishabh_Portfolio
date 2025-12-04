@@ -1,7 +1,8 @@
 import React from "react";
 import Card from "../components/Card";
+import { Toaster } from "react-hot-toast";
 
-const ProjectsPage = () => {
+const Projects = () => {
   const project = [
     {
       img: "https://via.placeholder.com/150",
@@ -18,7 +19,7 @@ const ProjectsPage = () => {
       link: "https://www.project2.com",
     },
 
-      {
+    {
       img: "https://via.placeholder.com/150",
       title: "Mobile App",
       name: "Project 3",
@@ -26,7 +27,7 @@ const ProjectsPage = () => {
       link: "https://www.project2.com",
     },
 
-      {
+    {
       img: "https://via.placeholder.com/150",
       title: "Mobile App",
       name: "Project 4",
@@ -34,7 +35,7 @@ const ProjectsPage = () => {
       link: "https://www.project2.com",
     },
 
-      {
+    {
       img: "https://via.placeholder.com/150",
       title: "Mobile App",
       name: "Project 5",
@@ -42,28 +43,33 @@ const ProjectsPage = () => {
       link: "https://www.project2.com",
     },
 
-      {
+    {
       img: "https://via.placeholder.com/150",
       title: "Mobile App",
       name: "Project 6",
       desc: "This is project 6",
       link: "https://www.project2.com",
     },
-
-
   ];
 
   return (
     <div className="pt-24 px-6 pb-24">
-      <h2 className="text-3xl font-bold text-center mb-10">My Projects</h2>
+      <section
+        id="projects"
+        className="pt-28 px-6 pb-24 bg-gray-50 scroll-mt-20"
+      >
+        <h2 className="text-3xl font-bold text-center mb-10">My Projects</h2>
+        <Toaster position="bottom-center" />
+      
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
         {project.map((project, index) => (
           <Card key={index} {...project} />
         ))}
       </div>
+      </section>
     </div>
   );
 };
 
-export default ProjectsPage;
+export default Projects;
