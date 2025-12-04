@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react"; 
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("#home");
+  const [scrolled, setScrolled] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -24,8 +24,11 @@ const Navbar = () => {
       element.scrollIntoView({ behavior: "smooth" });
     }
   };
+
   useEffect(() => {
     const handleScrollSpy = () => {
+      setScrolled(window.scrollY > 50);
+
       const sections = ["#home", "#projects", "#skills", "#contact"];
       const offset = 150;
 
@@ -41,6 +44,7 @@ const Navbar = () => {
         }
       });
     };
+
     window.addEventListener("scroll", handleScrollSpy);
     return () => window.removeEventListener("scroll", handleScrollSpy);
   }, []);
@@ -53,9 +57,9 @@ const Navbar = () => {
   ];
 
   const getLinkClass = (path) => {
-    const baseClass = "px-3 py-1 rounded transition-colors duration-200";
-    const activeClass = "bg-blue-600 text-white font-medium";
-    const inactiveClass = "text-gray-600 hover:bg-blue-50 hover:text-blue-600";
+    const baseClass = "px-4 py-2 rounded-lg transition-all duration-300 font-medium";
+    const activeClass = "text-cyan-400 border-b-2 border-cyan-400";
+    const inactiveClass = "text-slate-300 hover:text-white";
 
     return activeSection === path
       ? `${baseClass} ${activeClass}`
@@ -63,83 +67,113 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <a
-              href="#home"
-              className="text-2xl font-bold text-blue-600"
-              onClick={(event) => handleScroll(event, "#home")}
-            >
-              MyPortfolio
-            </a>
-          </div>
+    <>
+      {/* Apply blur to entire page when sidebar is open */}
+      {isOpen && (
+        <style>{`
+          body {
+            overflow: hidden;
+          }
+        `}</style>
+      )}
 
-          {/* Desktop Menu (Hidden on Mobile) */}
-          <div className="hidden md:block">
-            <ul className="flex space-x-4">
-              {navLinks.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.path}
-                    onClick={(e) => handleScroll(e, link.path)}
-                    className={getLinkClass(link.path)}
-                  >
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <nav
+        className={`w-full fixed top-0 left-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-slate-950/95 backdrop-blur-md shadow-lg border-b border-slate-700"
+            : "bg-slate-950/90 backdrop-blur-sm"
 
-          {/* Mobile Hamburger Button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={toggleMenu}
-              className="text-gray-600 hover:text-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded p-2"
-            >
-              {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-            </button>
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <div className="flex justify-between items-center h-20">
+            {/* Logo */}
+            <div className="flex-shrink-0">
+              <a
+                href="#home"
+                className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent hover:opacity-80 transition"
+                onClick={(event) => handleScroll(event, "#home")}
+              >
+                RG.
+              </a>
+            </div>
+
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center gap-8">
+              <ul className="flex gap-8">
+                {navLinks.map((link) => (
+                  <li key={link.name}>
+                    <a
+                      href={link.path}
+                      onClick={(e) => handleScroll(e, link.path)}
+                      className={getLinkClass(link.path)}
+                    >
+                      {link.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+
+              {/* Desktop Let's Talk Button */}
+              <a
+                href="#contact"
+                onClick={(e) => handleScroll(e, "#contact")}
+                className="ml-4 px-6 py-2 bg-white text-slate-900 font-semibold rounded-full hover:bg-cyan-400 hover:text-slate-900 transition-all duration-300 transform hover:scale-105 shadow-lg"
+              >
+                Let&apos;s Talk
+              </a>
+            </div>
+
+            {/* Mobile Hamburger Button - Always Visible on Top */}
+            <div className="md:hidden z-50 relative">
+              <button
+                onClick={toggleMenu}
+                className="text-white hover:text-cyan-400 focus:outline-none transition-colors duration-300 p-2"
+              >
+                {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Sidebar / Drawer */}
-      {/* Overlay (Background dimming) */}
+      {/* Mobile Overlay - Strong Blur */}
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 z-40 transition-opacity duration-300 md:hidden ${
-          isOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        className={`fixed inset-0 bg-black/40 backdrop-blur-md z-40 transition-all duration-300 md:hidden ${
+          isOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
         }`}
         onClick={closeMenu}
       ></div>
 
-      {/* Sidebar Content */}
+      {/* Mobile Sidebar */}
       <div
-        className={`fixed top-0 right-0 h-full w-64 bg-white shadow-xl z-50 transform transition-transform duration-300 ease-in-out md:hidden ${
+        className={`fixed top-0 right-0 h-screen w-72 bg-slate-950/98 backdrop-blur-xl border-l border-slate-700 z-40 transform transition-transform duration-300 ease-in-out md:hidden ${
           isOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex flex-col h-full">
           {/* Sidebar Header */}
-          <div className="flex justify-between items-center p-5 border-b">
-            <span className="text-xl font-bold text-blue-600">Menu</span>
+          <div className="flex justify-between items-center p-6 border-b border-slate-700">
+            <span className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              Menu
+            </span>
             <button
               onClick={toggleMenu}
-              className="text-gray-500 hover:text-red-500"
+              className="text-slate-400 hover:text-white transition-colors duration-300"
             >
               <FaTimes size={24} />
             </button>
           </div>
 
           {/* Sidebar Links */}
-          <ul className="flex flex-col p-4 space-y-4">
+          <ul className="flex flex-col p-6 space-y-6 flex-grow overflow-y-auto">
             {navLinks.map((link) => (
               <li key={link.name}>
                 <a
                   href={link.path}
-                  className={`block text-lg ${getLinkClass(link.path)}`}
+                  className={`block text-lg font-semibold transition ${getLinkClass(
+                    link.path
+                  )}`}
                   onClick={(e) => handleScroll(e, link.path)}
                 >
                   {link.name}
@@ -148,15 +182,19 @@ const Navbar = () => {
             ))}
           </ul>
 
-          {/* Sidebar Footer (Optional) */}
-          <div className="mt-auto p-6 border-t bg-gray-50">
-            <p className="text-sm text-gray-500 text-center">
-              © 2025 MyPortfolio
-            </p>
+          {/* Mobile CTA Button */}
+          <div className="p-6 border-t border-slate-700">
+            <a
+              href="#contact"
+              onClick={(e) => handleScroll(e, "#contact")}
+              className="block w-full px-6 py-3 bg-gradient-to-r from-blue-500 to-cyan-400 text-white font-semibold rounded-full text-center hover:opacity-90 transition-opacity duration-300 transform hover:scale-105"
+            >
+              Let&apos;s Talk
+            </a>
           </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 };
 

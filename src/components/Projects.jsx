@@ -3,72 +3,83 @@ import Card from "../components/Card";
 import { Toaster } from "react-hot-toast";
 
 const Projects = () => {
-  const project = [
+  const projects = [
     {
-      img: "https://via.placeholder.com/150",
+      img: "https://via.placeholder.com/400x300/1a1a2e/00d4ff?text=E-Commerce+Dashboard",
       title: "Web Development",
-      name: "Project 1",
-      desc: "This is project 1",
-      link: "https://www.project1.com",
+      name: "E-Commerce Dashboard",
+      desc: "A high-performance dashboard with dark mode and real-time analytics.",
+      link: "https://ecommerce-dashboard-demo.com",
+      githubLink: "https://github.com/username/ecommerce-dashboard",
     },
     {
-      img: "https://via.placeholder.com/150",
+      img: "https://via.placeholder.com/400x300/1a1a2e/00d4ff?text=Finance+Tracker",
       title: "Mobile App",
-      name: "Project 2",
-      desc: "This is project 2",
-      link: "https://www.project2.com",
+      name: "Finance Tracker",
+      desc: "Personal finance tracking with visual charts and budget goals.",
+      link: "https://finance-tracker-demo.com",
+      githubLink: "https://github.com/username/finance-tracker",
     },
-
     {
-      img: "https://via.placeholder.com/150",
-      title: "Mobile App",
-      name: "Project 3",
-      desc: "This is project 3",
-      link: "https://www.project2.com",
+      img: "https://via.placeholder.com/400x300/1a1a2e/00d4ff?text=Task+Master",
+      title: "Web App",
+      name: "Task Master",
+      desc: "Productivity application with drag-and-drop kanban boards.",
+      link: "https://task-master-demo.com",
+      githubLink: "https://github.com/username/task-master",
     },
-
     {
-      img: "https://via.placeholder.com/150",
+      img: "https://via.placeholder.com/400x300/1a1a2e/00d4ff?text=Project+4",
       title: "Mobile App",
-      name: "Project 4",
-      desc: "This is project 4",
-      link: "https://www.project2.com",
+      name: "Social Connect",
+      desc: "Real-time messaging platform with interactive features.",
+      link: "https://project4-demo.com",
+      githubLink: "https://github.com/username/social-connect",
     },
-
     {
-      img: "https://via.placeholder.com/150",
-      title: "Mobile App",
-      name: "Project 5",
-      desc: "This is project 5",
-      link: "https://www.project2.com",
+      img: "https://via.placeholder.com/400x300/1a1a2e/00d4ff?text=Project+5",
+      title: "Web App",
+      name: "E-Learning Hub",
+      desc: "Online course platform with progress tracking and certificates.",
+      link: "https://project5-demo.com",
+      githubLink: "https://github.com/username/elearning-hub",
     },
-
     {
-      img: "https://via.placeholder.com/150",
-      title: "Mobile App",
-      name: "Project 6",
-      desc: "This is project 6",
-      link: "https://www.project2.com",
+      img: "https://via.placeholder.com/400x300/1a1a2e/00d4ff?text=Project+6",
+      title: "Web Development",
+      name: "AI Content Generator",
+      desc: "Smart content creation tool powered by machine learning.",
+      link: "https://project6-demo.com",
+      githubLink: "https://github.com/username/ai-content-gen",
     },
   ];
 
   return (
-    <div className="pt-24 px-6 pb-24">
-      <section
-        id="projects"
-        className="pt-28 px-6 pb-24 bg-gray-50 scroll-mt-20"
-      >
-        <h2 className="text-3xl font-bold text-center mb-10">My Projects</h2>
-        <Toaster position="bottom-center" />
-      
+    <section
+      id="projects"
+      className="py-24 px-6 bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 scroll-mt-20"
+    >
+      <div className="max-w-7xl mx-auto">
+        {/* Section Title */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Selected <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">Works</span>
+          </h2>
+          <p className="text-slate-400 text-lg max-w-2xl mx-auto">
+            A collection of projects showcasing my expertise in full-stack development, UI/UX design, and modern web technologies.
+          </p>
+        </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 justify-items-center">
-        {project.map((project, index) => (
-          <Card key={index} {...project} />
-        ))}
+        <Toaster position="bottom-center" />
+
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {projects.map((project, index) => (
+            <Card key={index} {...project} />
+          ))}
+        </div>
       </div>
-      </section>
-    </div>
+    </section>
   );
 };
 
