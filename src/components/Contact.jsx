@@ -22,7 +22,7 @@ const Contact = ({ isDark }) => {
       icon: <FaGithub />,
       name: "GitHub",
       desc: "Check out my projects",
-      link: "https://github.com/rishabh-garg",
+      link: "https://github.com/rishabh4985",
       color: "hover:text-white",
     },
   ];
