@@ -10,7 +10,6 @@ import {
 import {
   SiTailwindcss,
   SiMongodb,
-  SiFigma,
   SiPostman,
   SiNextdotjs,
 } from "react-icons/si";
@@ -22,21 +21,23 @@ const Skills = ({ isDark }) => {
       categoryColor: "from-cyan-500 to-blue-500",
       categoryBg: "bg-cyan-500/20",
       items: [
-        { name: "React", icon: <FaReact />, color: "text-cyan-400" },
         { name: "React JS", icon: <FaReact />, color: "text-cyan-400" },
-        { name: "HTML5", icon: <FaHtml5 />, color: "text-orange-500" },
-        { name: "CSS3", icon: <FaCss3Alt />, color: "text-blue-400" },
         { name: "JavaScript", icon: <FaJs />, color: "text-yellow-400" },
+        { name: "HTML5", icon: <FaHtml5 />, color: "text-orange-500" },
         { name: "Tailwind", icon: <SiTailwindcss />, color: "text-cyan-400" },
-        { name: "Next JS", icon: <SiNextdotjs />, color: isDark ? "text-white" : "text-slate-900" },
+        { name: "CSS3", icon: <FaCss3Alt />, color: "text-blue-400" },
+        {
+          name: "Next JS(Basics)",
+          icon: <SiNextdotjs />,
+          color: isDark ? "text-white" : "text-slate-900",
+        },
       ],
     },
     {
-      category: "Backend",
+      category: "Backend and Databases",
       categoryColor: "from-green-500 to-emerald-500",
       categoryBg: "bg-green-500/20",
       items: [
-        { name: "Node", icon: <FaNode />, color: "text-green-400" },
         { name: "Node JS", icon: <FaNode />, color: "text-green-400" },
         { name: "MongoDB", icon: <SiMongodb />, color: "text-green-400" },
         {
@@ -51,9 +52,13 @@ const Skills = ({ isDark }) => {
       categoryColor: "from-purple-500 to-pink-500",
       categoryBg: "bg-purple-500/20",
       items: [
-        { name: "Git / GitHub", icon: <FaGitAlt />, color: isDark ? "text-white" : "text-slate-900" },
-        { name: "Figma", icon: <SiFigma />, color: "text-purple-400" },
+        {
+          name: "Git / GitHub",
+          icon: <FaGitAlt />,
+          color: isDark ? "text-white" : "text-slate-900",
+        },
         { name: "Postman", icon: <SiPostman />, color: "text-orange-500" },
+        
       ],
     },
   ];
@@ -70,16 +75,23 @@ const Skills = ({ isDark }) => {
       <div className="max-w-7xl mx-auto">
         {/* Section Title */}
         <div className="text-center mb-16">
-          <h2 className={`text-4xl md:text-5xl font-bold mb-4 ${isDark ? "text-white" : "text-slate-900"}`}>
+          <h2
+            className={`text-4xl md:text-5xl font-bold mb-4 ${
+              isDark ? "text-white" : "text-slate-900"
+            }`}
+          >
             Skills &{" "}
             <span className="bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
               Expertise
             </span>
           </h2>
-          <p className={`text-lg transition-colors duration-500 ${
-            isDark ? "text-slate-400" : "text-slate-600"
-          }`}>
-            Technologies and tools I work with to build amazing digital experiences
+          <p
+            className={`text-lg transition-colors duration-500 ${
+              isDark ? "text-slate-400" : "text-slate-600"
+            }`}
+          >
+            Technologies and tools I work with to build amazing digital
+            experiences
           </p>
         </div>
 
@@ -96,10 +108,14 @@ const Skills = ({ isDark }) => {
             >
               {/* Category Header */}
               <div className="mb-8">
-                <h3 className={`text-2xl font-bold bg-gradient-to-r ${skillSection.categoryColor} bg-clip-text text-transparent`}>
+                <h3
+                  className={`text-2xl font-bold bg-gradient-to-r ${skillSection.categoryColor} bg-clip-text text-transparent`}
+                >
                   {skillSection.category}
                 </h3>
-                <div className={`h-1 w-12 ${skillSection.categoryBg} rounded-full mt-2`}></div>
+                <div
+                  className={`h-1 w-12 ${skillSection.categoryBg} rounded-full mt-2`}
+                ></div>
               </div>
 
               {/* Skills Grid */}
@@ -114,16 +130,20 @@ const Skills = ({ isDark }) => {
                     }`}
                   >
                     {/* Icon */}
-                    <span className={`text-2xl ${item.color} group-hover/item:scale-125 transition-transform`}>
+                    <span
+                      className={`text-2xl ${item.color} group-hover/item:scale-125 transition-transform`}
+                    >
                       {item.icon}
                     </span>
 
                     {/* Skill Name */}
-                    <span className={`font-semibold transition-colors ${
-                      isDark
-                        ? "text-slate-200 group-hover/item:text-white"
-                        : "text-slate-700 group-hover/item:text-slate-900"
-                    }`}>
+                    <span
+                      className={`font-semibold transition-colors ${
+                        isDark
+                          ? "text-slate-200 group-hover/item:text-white"
+                          : "text-slate-700 group-hover/item:text-slate-900"
+                      }`}
+                    >
                       {item.name}
                     </span>
                   </div>
@@ -133,13 +153,29 @@ const Skills = ({ isDark }) => {
           ))}
         </div>
 
-        {/* Optional: Stats Section */}
+        {/* Stats Section */}
         <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6">
           {[
-            { value: "20+", label: "Projects", gradient: "from-cyan-400 to-blue-500" },
-            { value: "15+", label: "Technologies", gradient: "from-green-400 to-emerald-500" },
-            { value: "100%", label: "Commitment", gradient: "from-purple-400 to-pink-500" },
-            { value: "5+", label: "Years", gradient: "from-orange-400 to-red-500" },
+            {
+              value: "5+",
+              label: "Projects",
+              gradient: "from-cyan-400 to-blue-500",
+            },
+            {
+              value: "5+",
+              label: "Technologies",
+              gradient: "from-green-400 to-emerald-500",
+            },
+            {
+              value: "100%",
+              label: "Commitment",
+              gradient: "from-purple-400 to-pink-500",
+            },
+            {
+              value: "5+",
+              label: "Months",
+              gradient: "from-orange-400 to-red-500",
+            },
           ].map((stat, index) => (
             <div
               key={index}
@@ -149,12 +185,16 @@ const Skills = ({ isDark }) => {
                   : "bg-slate-100/50 border-slate-200"
               }`}
             >
-              <div className={`text-3xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}>
+              <div
+                className={`text-3xl font-bold bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}
+              >
                 {stat.value}
               </div>
-              <p className={`mt-2 transition-colors duration-500 ${
-                isDark ? "text-slate-400" : "text-slate-600"
-              }`}>
+              <p
+                className={`mt-2 transition-colors duration-500 ${
+                  isDark ? "text-slate-400" : "text-slate-600"
+                }`}
+              >
                 {stat.label}
               </p>
             </div>
