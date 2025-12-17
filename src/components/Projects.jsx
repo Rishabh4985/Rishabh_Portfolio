@@ -5,17 +5,17 @@ import { Toaster } from "react-hot-toast";
 const Projects = ({ isDark }) => {
   const projects = [
     {
-      img: "https://via.placeholder.com/400x300/1a1a2e/00d4ff?text=E-Commerce+Dashboard",
+      img: "https://astrokapoor.net/assets/img/slider/banner3-03.jpg",
       title: "Web Development",
       name: "E-Commerce Website",
       desc: "My latest e-commerce live project with full shopping cart functionality and many more.",
       link: "https://astrokapoor.net/",
     },
     {
-      img: "https://via.placeholder.com/400x300/1a1a2e/00d4ff?text=Finance+Tracker",
+      img: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8ZGFzaGJvYXJkfGVufDB8fDB8fHww",
       title: "Mobile App",
       name: "Dashboard",
-      desc: "Personal finance tracking dashboard with visual charts and data representations for sales team record management.",
+      desc: "Personal finance tracking dashboard for sales team record management.",
       link: "https://astrokapoor-fe.vercel.app/",
     },
     {
